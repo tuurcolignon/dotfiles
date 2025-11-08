@@ -1,0 +1,15 @@
+#!/bin/bash
+sleep 0.1
+artist=$(playerctl -p spotify metadata artist 2>/dev/null)
+title=$(playerctl -p spotify metadata title 2>/dev/null)
+album_art_url=$(playerctl -p spotify metadata mpris:artUrl 2>/dev/null)
+
+if [[ -n "$artist" && -n "$title" ]]; then
+    # Download album art if available
+    if [[ "$album_art_url" == http* ]]; then
+        curl -s "$album_art_url" -o /tmp/spotify_album_art.jpg
+        notify-send "$artist - $title" -i /tmp/spotify_album_art.jpg
+    else
+        notify-send "$artist - $title"
+    fi
+fi

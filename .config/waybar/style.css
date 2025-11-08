@@ -1,0 +1,326 @@
+/* Dracula Waybar - Optimized Stylesheet */
+
+* {
+    font-family: "JetBrains Mono Nerd Font", monospace;
+    font-size: 14px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none; 
+    text-shadow: none;
+}
+
+/* === Common Styles === */
+
+window#waybar,
+tooltip {
+    background: #282a36;
+    color: #f8f8f2;
+    border-radius: 8px;
+}
+
+window#waybar {
+    border: 2px solid #44475a;
+    border-radius: 12px;
+}
+
+tooltip {
+    border: 1px solid #44475a;
+}
+
+/* === Workspaces === */
+
+#workspaces {
+    background: transparent;
+    margin: 5px 0 5px 10px;
+    padding: 0 5px;
+    border-radius: 8px;
+}
+
+#workspaces button {
+    background: transparent;
+    color: #6272a4;
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin: 0 2px;
+    min-width: 25px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+    background: #44475a;
+    color: #f8f8f2;
+    color: #73768d
+}
+
+#workspaces button.active {
+    background: #bd93f9;
+    color:#282a36;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    background: #e06565;
+    color: #282a36;
+}
+
+#workspaces button.urgent:hover {
+    background: #7c3838;
+}
+
+/* === Clock === */
+
+#clock {
+    background: transparent;
+    color: #ffffff;
+    padding: 0 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+}
+#clock:hover {
+    background: #44475a;
+}
+
+/* === Hover Effects Shared === 
+#pulseaudio:hover,
+#cpu.normal:hover,
+#battery.charging:hover {
+    background: #166135;
+}*/
+
+/* === Modules Shared Layout === */
+
+#pulseaudio,
+#network,
+#battery,
+#tray,
+#custom-power,
+#backlight,
+#cpu,
+#power-profiles-daemon,
+#memory {
+    padding: 0 12px;
+    margin: 5px 2px;
+    border-radius: 8px;
+}
+
+/* === Tray === */
+
+#tray {
+    background: #6272a4;
+}
+
+/*#tray:hover {
+    background: #404b6b;
+}*/
+
+/* === CPU === */
+
+#cpu,
+#pulseaudio,
+#battery.charging,
+#memory {
+    background: #2ecc71;
+    color: #000;
+}
+
+#cpu.warning,
+#memory.warning {
+    background: #cc952e;
+}
+
+#cpu,
+#memory {
+    padding-right: 18px;
+}
+
+/*#cpu.warning:hover {
+    background: #77571c;
+}*/
+
+#cpu.critical,
+#memory.critical {
+    background: #cc382e;
+}
+
+/*#cpu.critical:hover {
+    background: #681d18;
+}*/
+
+#cpu.death,
+#memory.death {
+    background: #b90000;
+}
+
+/*#cpu.death:hover {
+    background: #640000;
+}*/
+
+/* === custom-brightness-bar === */
+
+#backlight {
+    background: #ffffa7;
+    color: #000;
+}
+
+/*#custom-brightness-bar:hover {
+    background: #636341;
+}*/
+
+/* === Network === */
+
+#network {
+    background: #8be9fd;
+    color: #000;
+}
+
+/*#network:hover {
+    background: #395e68;
+}*/
+
+#network.disconnected {
+    background: #ff5555;
+}
+
+#network.ethernet {
+    background: #146274;
+}
+
+#network.wifi {
+    background: #8be9fd;
+}
+
+/* === Power Profiles Daemon === */
+#power-profiles-daemon.power-saver {
+    color: #fff;
+    background-color: #35724e;
+    padding: 0px 17px 0px 12px
+}
+
+/*#power-profiles-daemon.power-saver:hover {
+    background-color: #1f442f
+}*/
+
+#power-profiles-daemon.performance {
+    background-color: #cc382e;
+}
+/*#power-profiles-daemon.performance:hover {
+    background-color: #681d18
+}*/
+#power-profiles-daemon.balanced {
+    background-color: #395e68;
+    padding: 0px 17px 0px 12px
+}
+/*#power-profiles-daemon.balanced:hover {
+    background-color: #284147
+}*/
+
+/* === Battery === */
+
+#battery {
+    background: #99fa8c;
+    color: #000;
+}
+
+/*#battery:hover {
+    background: #829254;
+}*/
+
+#battery.warning:not(.charging) {
+    background-color: #ffb86c;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #cc382e;
+    animation: blink 0.5s linear infinite alternate;
+}
+
+@keyframes blink {
+    to { opacity: 0.3; }
+}
+
+/* === Power & Muted Audio === */
+
+#custom-power,
+#pulseaudio.muted {
+    background: #e06565;
+    color: #000;
+}
+
+#custom-power {
+    font-size: 16px;
+    padding: 0 10px;
+    margin: 5px 10px 5px 2px;
+}
+
+/* === Custom music player === */
+/* === Custom music player === */
+#custom-music,
+#custom-music-next,
+#custom-music-prev {
+    background-color: #6272a4;
+    padding: 0 12px;
+    margin: 5px 0px;
+    border-radius: 0px;
+}
+
+/* Darker background when no player is active */
+#custom-music.stopped,
+#custom-music-next.stopped,
+#custom-music-prev.stopped {
+    background-color: #44475a; /* Darker shade */
+}
+
+#custom-music.playing,
+#custom-music-next.playing,
+#custom-music-prev.playing {
+    background-color: #6272a4; /* Normal color */
+}
+
+#custom-music.playing:hover,
+#custom-music-next.playing:hover,
+#custom-music-prev.playing:hover,
+#custom-music.paused:hover,
+#custom-music-next.paused:hover,
+#custom-music-prev.paused:hover {
+    background-color:#849adb;
+}
+
+#custom-music.paused,
+#custom-music-next.paused,
+#custom-music-prev.paused  {
+    background-color: #6272a4; /* Normal color */
+}
+
+#custom-music.stopped:hover {
+    background-color: #282a36;
+} 
+
+#custom-music-next {
+    margin-right: 2px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+#custom-music-prev {
+    margin-left: 2px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+/*#custom-power:hover,
+#pulseaudio.muted:hover {
+    background: #7c3838;
+}*/
+
+/* === Module Separators (Optional) === */
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #custom-power {
+    margin-right: 5px;
+}

@@ -1,0 +1,200 @@
+{
+    // Waybar Configuration for Hyprland
+    // Position and layout
+    "layer": "top",
+    "position": "top",
+    "height": 35,
+    "spacing": 0,
+    "margin-top": 5,
+    "margin-left": 10,
+    "margin-right": 10,
+    "margin-bottom": 0,
+
+    // Module layout
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "custom/music-prev",
+        "custom/music",
+        "custom/music-next",
+        "pulseaudio", 
+        "backlight", 
+        //"custom/brightness-bar",
+        "cpu",
+        "memory",
+        "custom/power-profile",
+        "power-profiles-daemon",
+        "battery", 
+        "network", 
+        "tray", 
+        "custom/power"
+    ],
+
+    // Workspaces module
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "format": "{id}"
+    },
+
+ 
+    // Clock module
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    // Audio module
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-muted": "\udb81\udd81 {volume}%",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋋",
+            "headset": "󰋋",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["\uf026", "\uf027", "\uf028 "]
+        },
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+        "smooth-scrolling-threshold": 1
+    },
+    // CPU
+    "cpu": {
+        "states": {
+            "death": 75,
+            "critical": 50,
+            "warning": 25,
+            "normal": 0
+        },
+        "format": "\uf4bc",//  {usage}%",
+        "tooltip": true,
+        "interval": 3
+    },
+
+    // Memory
+    "memory": {
+        "format": "\uefc5",//  {}%",
+        "states": {
+            "death": 90,
+            "critical": 70,
+            "warning": 50,
+            "normal": 0
+        },
+        "interval": 5
+    },
+
+    // Network module
+    "network": {
+        "format-wifi": "\uf1eb  {essid} ({signalStrength}%)",
+        "format-ethernet": "󰈀 Connected",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "\udb82\udd2d Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-ethernet": "󰈀 {ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 25,
+        "tooltip": false
+    },
+
+    // Backlight
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "\uf522  {percent}%",
+        "on-scroll-up": "brightnessctl set +10%",
+        "on-scroll-down": "~/.config/hypr/scripts/brightness-down.sh",
+        "on-click": "brightnessctl set +10%",
+        "on-click-right": "~/.config/hypr/scripts/brightness-down.sh"
+    },
+
+//    "custom/brightness-bar": {
+//        "exec": "~/.config/waybar/scripts/brightness-bar.sh",
+//        "interval": 0,
+//        "tooltip": false,
+//        "format": "\uf522 {}",
+//        "return-type": "json",
+//        "on-scroll-up": "brightnessctl set +10%",
+//        "on-scroll-down": "~/.config/hypr/scripts/brightness-down.sh",
+//        "on-click": "brightnessctl set +10%",
+//        "on-click-right": "~/.config/hypr/scripts/brightness-down.sh"
+//    },
+
+
+    // Tray
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8,
+        "show-passive-items": true
+    },
+
+    // Power profiles
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+
+    "custom/power-profile": {
+        "exec": "~/.config/waybar/scripts/profile-watch.sh",
+        "interval": 1
+    },
+
+    // Battery module
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "\udb80\udc84 {capacity}%",
+        "format-plugged": "\udb80\udc84 {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-full": "󰁹 {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "{timeTo}",
+        "interval": 1
+    },
+
+    // Power menu
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "wlogout"
+    },
+
+    // Music player
+    "custom/music": {
+        "exec": "~/.config/waybar/scripts/music.sh status",
+        "interval": 1,
+        "format": "{}",
+        "return-type": "json",
+        "on-click": "~/.config/waybar/scripts/music.sh toggle && pkill -RTMIN+8 waybar && ~/.config/waybar/scripts/music-notification",
+        "on-click-right": "pkill spotify"
+    },
+    "custom/music-prev": {
+        "exec": "~/.config/waybar/scripts/music.sh status",
+        "interval": 1,
+        "format": "\udb81\udcae",
+        "return-type": "json",
+        "on-click": "playerctl previous && ~/.config/waybar/scripts/music-notification",
+        "signal": 8
+    },
+    "custom/music-next": {
+        "exec": "~/.config/waybar/scripts/music.sh status",
+        "interval": 1,
+        "format": "\udb81\udcad",
+        "return-type": "json",
+        "on-click": "playerctl next  && ~/.config/waybar/scripts/music-notification",
+        "signal": 8
+    }
+}

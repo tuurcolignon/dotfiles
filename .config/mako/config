@@ -1,0 +1,14 @@
+default-timeout=4000
+border-radius=5
+background-color=#282a36
+font=monospace
+default-timeout=4000
+border-radius=5
+background-color=#282a36
+border-color=#bd93f9
+
+font=monospace 12
+text-color=#f8f8f2
+padding=12
+height=300
+width=300
